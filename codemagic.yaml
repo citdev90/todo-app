@@ -5,7 +5,13 @@ workflows:
     environment:
       vars:
         NODE: 20
+        # Uncomment and set these for signed APK
+        # CM_KEYSTORE_PASSWORD: Encrypted(...)
+        # CM_KEY_ALIAS_PASSWORD: Encrypted(...)
+        # CM_KEYSTORE_PATH: /tmp/keystore.keystore
       node: 20
+      java: 17
+      gradle: 8.5
     cache:
       cache_paths:
         - ~/.npm
@@ -34,9 +40,19 @@ workflows:
       - name: Build React app
         script: |
           npm run build
+      - name: Prepare signing configuration (optional)
+        script: |
+          # Only needed for signed APK - uncomment if you have keystore
+          # echo $CM_KEYSTORE | base64 -d > /tmp/keystore.keystore
+          # mkdir -p platforms/android/app/src/main/assets
+        when: always
       - name: Build Android APK
         script: |
+          # For unsigned APK (debug)
           npx cordova build android --release -- --packageType=apk
+          
+          # For signed APK (uncomment and configure keystore)
+          # npx cordova build android --release -- --packageType=apk --keystore=$CM_KEYSTORE_PATH --storePassword=$CM_KEYSTORE_PASSWORD --alias=$CM_KEY_ALIAS --password=$CM_KEY_ALIAS_PASSWORD
     artifacts:
       - platforms/android/app/build/outputs/apk/release/*.apk
       # Uncomment the line below if you also want the AAB file
