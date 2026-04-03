@@ -7,8 +7,12 @@ workflows:
         NODE: 18
       node: 18
     cache:
-      - ~/.npm
-      - node_modules
+      cache_paths:
+        - ~/.npm
+        - node_modules
+        # Optional but recommended for Cordova:
+        # - platforms
+        # - plugins
     triggering:
       events:
         - push
@@ -49,8 +53,11 @@ workflows:
       node: 18
       xcode: latest
     cache:
-      - ~/.npm
-      - node_modules
+      cache_paths:
+        - ~/.npm
+        - node_modules
+        # - platforms
+        # - plugins
     triggering:
       events:
         - push
@@ -85,9 +92,6 @@ workflows:
       vars:
         NODE: 18
       node: 18
-    cache:
-      - ~/.npm
-      - node_modules
     triggering:
       events:
         - push
