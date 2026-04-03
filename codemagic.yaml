@@ -30,22 +30,23 @@ workflows:
       - name: Install dependencies
         script: |
           npm install
-      - name: Setup Cordova
+      - name: Setup Cordova Platform
         script: |
           npx cordova platform add android
+      - name: Build React app for Cordova
+        script: |
+          npm run build
+      - name: Add Cordova Plugins
+        script: |
           npx cordova plugin add cordova-plugin-device
           npx cordova plugin add cordova-plugin-dialogs
           npx cordova plugin add cordova-plugin-whitelist
-      - name: Build React app
+      - name: Prepare Cordova
         script: |
-          npm run build
+          npx cordova prepare android
       - name: Build Android APK
         script: |
-          # For unsigned APK (debug)
           npx cordova build android --release -- --packageType=apk
-          
-          # For signed APK (uncomment and configure keystore)
-          # npx cordova build android --release -- --packageType=apk --keystore=$CM_KEYSTORE_PATH --storePassword=$CM_KEYSTORE_PASSWORD --alias=$CM_KEY_ALIAS --password=$CM_KEY_ALIAS_PASSWORD
     artifacts:
       - platforms/android/app/build/outputs/apk/release/*.apk
       # Uncomment the line below if you also want the AAB file
@@ -108,15 +109,20 @@ workflows:
       - name: Install dependencies
         script: |
           npm install
-      - name: Setup Cordova
+      - name: Setup Cordova Platform
         script: |
           npx cordova platform add android
+      - name: Build React app for Cordova
+        script: |
+          npm run build
+      - name: Add Cordova Plugins
+        script: |
           npx cordova plugin add cordova-plugin-device
           npx cordova plugin add cordova-plugin-dialogs
           npx cordova plugin add cordova-plugin-whitelist
-      - name: Build React app
+      - name: Prepare Cordova
         script: |
-          npm run build
+          npx cordova prepare android
       - name: Build Android Debug
         script: |
           npx cordova build android --debug
