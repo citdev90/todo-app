@@ -4,8 +4,8 @@ workflows:
     working_directory: .
     environment:
       vars:
-        NODE: 18
-      node: 18
+        NODE: 20
+      node: 20
     cache:
       cache_paths:
         - ~/.npm
@@ -49,8 +49,8 @@ workflows:
     working_directory: .
     environment:
       vars:
-        NODE: 18
-      node: 18
+        NODE: 20
+      node: 20
       xcode: latest
     cache:
       cache_paths:
@@ -90,8 +90,8 @@ workflows:
     working_directory: .
     environment:
       vars:
-        NODE: 18
-      node: 18
+        NODE: 20
+      node: 20
     triggering:
       events:
         - push
