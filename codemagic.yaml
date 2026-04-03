@@ -9,9 +9,8 @@
          NODE: 18
        node: 18
      cache:
-       cache_paths:
-         - ~/.npm
-         - node_modules
+      - ~/.npm
+      - node_modules
      triggering:
        events:
          - push
@@ -51,9 +50,8 @@
        node: 18
        xcode: latest
      cache:
-       cache_paths:
-         - ~/.npm
-         - node_modules
+      - ~/.npm
+      - node_modules
      triggering:
        events:
          - push
@@ -88,9 +86,8 @@
          NODE: 18
        node: 18
      cache:
-       cache_paths:
-         - ~/.npm
-         - node_modules
+      - ~/.npm
+      - node_modules
      triggering:
        events:
          - push
