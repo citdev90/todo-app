@@ -137,4 +137,4 @@ workflows:
         script: |
           npx cordova build android --debug
     artifacts:
-      - platforms/android/app/build/outputs/apk/debug/*.apks
+      - platforms/android/app/build/outputs/apk/debug/*.apk
