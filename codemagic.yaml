@@ -34,6 +34,10 @@ workflows:
         script: |
           npx cordova platform remove android || true
           npx cordova platform add android
+      - name: Clean Plugin Cache
+        script: |
+          rm -rf platforms/android/app/src/main/java/org/apache/cordova/whitelist
+          rm -rf plugins/cordova-plugin-whitelist
       - name: Build React app for Cordova
         script: |
           npm run build
@@ -114,6 +118,10 @@ workflows:
         script: |
           npx cordova platform remove android || true
           npx cordova platform add android
+      - name: Clean Plugin Cache
+        script: |
+          rm -rf platforms/android/app/src/main/java/org/apache/cordova/whitelist
+          rm -rf plugins/cordova-plugin-whitelist
       - name: Build React app for Cordova
         script: |
           npm run build
@@ -129,4 +137,4 @@ workflows:
         script: |
           npx cordova build android --debug
     artifacts:
-      - platforms/android/app/build/outputs/apk/debug/*.apk
+      - platforms/android/app/build/outputs/apk/debug/*.apks
