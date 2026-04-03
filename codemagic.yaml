@@ -41,6 +41,25 @@ workflows:
       - name: Build React app for Cordova
         script: |
           npm run build
+      - name: Verify Bundle Creation
+        script: |
+          echo "Verifying bundle creation..."
+          ls -la www/
+          echo "Checking if bundle.js exists:"
+          if [ -f "www/bundle.js" ]; then
+            echo "✅ bundle.js created successfully"
+            echo "Bundle size: $(du -h www/bundle.js)"
+          else
+            echo "❌ bundle.js not found!"
+            exit 1
+          fi
+          echo "Checking if index.html exists:"
+          if [ -f "www/index.html" ]; then
+            echo "✅ index.html created successfully"
+          else
+            echo "❌ index.html not found!"
+            exit 1
+          fi
       - name: Add Cordova Plugins
         script: |
           npx cordova plugin add cordova-plugin-device
@@ -125,6 +144,25 @@ workflows:
       - name: Build React app for Cordova
         script: |
           npm run build
+      - name: Verify Bundle Creation
+        script: |
+          echo "Verifying bundle creation..."
+          ls -la www/
+          echo "Checking if bundle.js exists:"
+          if [ -f "www/bundle.js" ]; then
+            echo "✅ bundle.js created successfully"
+            echo "Bundle size: $(du -h www/bundle.js)"
+          else
+            echo "❌ bundle.js not found!"
+            exit 1
+          fi
+          echo "Checking if index.html exists:"
+          if [ -f "www/index.html" ]; then
+            echo "✅ index.html created successfully"
+          else
+            echo "❌ index.html not found!"
+            exit 1
+          fi
       - name: Add Cordova Plugins
         script: |
           npx cordova plugin add cordova-plugin-device
