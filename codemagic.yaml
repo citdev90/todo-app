@@ -32,6 +32,7 @@ workflows:
           npm install
       - name: Setup Cordova Platform
         script: |
+          npx cordova platform remove android || true
           npx cordova platform add android
       - name: Build React app for Cordova
         script: |
@@ -111,6 +112,7 @@ workflows:
           npm install
       - name: Setup Cordova Platform
         script: |
+          npx cordova platform remove android || true
           npx cordova platform add android
       - name: Build React app for Cordova
         script: |
