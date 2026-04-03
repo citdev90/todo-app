@@ -1,115 +1,115 @@
-# CodeMagic CI/CD configuration for Cordova Todo App
-# This file configures automated builds for Android and iOS
-
- workflows:
-   - name: Build Android APK
-     working_directory: .
-     environment:
-       vars:
-         NODE: 18
-       node: 18
-     cache:
+workflows:
+  build-android-release:
+    name: Build Android APK
+    working_directory: .
+    environment:
+      vars:
+        NODE: 18
+      node: 18
+    cache:
       - ~/.npm
       - node_modules
-     triggering:
-       events:
-         - push
-         - pull_request
-       branch_patterns:
-         - pattern: main
-           include: true
-           source: true
-         - pattern: develop
-           include: true
-           source: true
-     scripts:
-       - name: Install dependencies
-         script: |
-           npm install
-       - name: Setup Cordova
-         script: |
-           npx cordova platform add android
-           npx cordova plugin add cordova-plugin-device
-           npx cordova plugin add cordova-plugin-dialogs
-           npx cordova plugin add cordova-plugin-whitelist
-       - name: Build React app
-         script: |
-           npm run build
-       - name: Build Android APK
-         script: |
-           npx cordova build android --release
-     artifacts:
-       - platforms/android/app/build/outputs/apk/release/*.apk
-       - platforms/android/app/build/outputs/bundle/release/*.aab
+    triggering:
+      events:
+        - push
+        - pull_request
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: true
+        - pattern: develop
+          include: true
+          source: true
+    scripts:
+      - name: Install dependencies
+        script: |
+          npm install
+      - name: Setup Cordova
+        script: |
+          npx cordova platform add android
+          npx cordova plugin add cordova-plugin-device
+          npx cordova plugin add cordova-plugin-dialogs
+          npx cordova plugin add cordova-plugin-whitelist
+      - name: Build React app
+        script: |
+          npm run build
+      - name: Build Android APK
+        script: |
+          npx cordova build android --release
+    artifacts:
+      - platforms/android/app/build/outputs/apk/release/*.apk
+      - platforms/android/app/build/outputs/bundle/release/*.aab
 
-   - name: Build iOS (when needed)
-     working_directory: .
-     environment:
-       vars:
-         NODE: 18
-       node: 18
-       xcode: latest
-     cache:
+  build-ios-release:
+    name: Build iOS (when needed)
+    working_directory: .
+    environment:
+      vars:
+        NODE: 18
+      node: 18
+      xcode: latest
+    cache:
       - ~/.npm
       - node_modules
-     triggering:
-       events:
-         - push
-         - pull_request
-       branch_patterns:
-         - pattern: main
-           include: true
-           source: true
-     scripts:
-       - name: Install dependencies
-         script: |
-           npm install
-       - name: Setup Cordova
-         script: |
-           npx cordova platform add ios
-           npx cordova plugin add cordova-plugin-device
-           npx cordova plugin add cordova-plugin-dialogs
-           npx cordova plugin add cordova-plugin-whitelist
-       - name: Build React app
-         script: |
-           npm run build
-       - name: Build iOS
-         script: |
-           npx cordova build ios --release
-     artifacts:
-       - platforms/ios/build/device/*.ipa
+    triggering:
+      events:
+        - push
+        - pull_request
+      branch_patterns:
+        - pattern: main
+          include: true
+          source: true
+    scripts:
+      - name: Install dependencies
+        script: |
+          npm install
+      - name: Setup Cordova
+        script: |
+          npx cordova platform add ios
+          npx cordova plugin add cordova-plugin-device
+          npx cordova plugin add cordova-plugin-dialogs
+          npx cordova plugin add cordova-plugin-whitelist
+      - name: Build React app
+        script: |
+          npm run build
+      - name: Build iOS
+        script: |
+          npx cordova build ios --release
+    artifacts:
+      - platforms/ios/build/device/*.ipa
 
-   - name: Development Build
-     working_directory: .
-     environment:
-       vars:
-         NODE: 18
-       node: 18
-     cache:
+  development-build:
+    name: Development Build
+    working_directory: .
+    environment:
+      vars:
+        NODE: 18
+      node: 18
+    cache:
       - ~/.npm
       - node_modules
-     triggering:
-       events:
-         - push
-       branch_patterns:
-         - pattern: develop
-           include: true
-           source: true
-     scripts:
-       - name: Install dependencies
-         script: |
-           npm install
-       - name: Setup Cordova
-         script: |
-           npx cordova platform add android
-           npx cordova plugin add cordova-plugin-device
-           npx cordova plugin add cordova-plugin-dialogs
-           npx cordova plugin add cordova-plugin-whitelist
-       - name: Build React app
-         script: |
-           npm run build
-       - name: Build Android Debug
-         script: |
-           npx cordova build android --debug
-     artifacts:
-       - platforms/android/app/build/outputs/apk/debug/*.apk
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: develop
+          include: true
+          source: true
+    scripts:
+      - name: Install dependencies
+        script: |
+          npm install
+      - name: Setup Cordova
+        script: |
+          npx cordova platform add android
+          npx cordova plugin add cordova-plugin-device
+          npx cordova plugin add cordova-plugin-dialogs
+          npx cordova plugin add cordova-plugin-whitelist
+      - name: Build React app
+        script: |
+          npm run build
+      - name: Build Android Debug
+        script: |
+          npx cordova build android --debug
+    artifacts:
+      - platforms/android/app/build/outputs/apk/debug/*.apk
