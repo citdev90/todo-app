@@ -41,7 +41,7 @@ workflows:
         script: |
           npx cordova plugin add cordova-plugin-device
           npx cordova plugin add cordova-plugin-dialogs
-          npx cordova plugin add cordova-plugin-whitelist
+          # cordova-plugin-whitelist is deprecated and no longer needed in modern Cordova
       - name: Prepare Cordova
         script: |
           npx cordova prepare android
@@ -121,7 +121,7 @@ workflows:
         script: |
           npx cordova plugin add cordova-plugin-device
           npx cordova plugin add cordova-plugin-dialogs
-          npx cordova plugin add cordova-plugin-whitelist
+          # cordova-plugin-whitelist is deprecated and no longer needed in modern Cordova
       - name: Prepare Cordova
         script: |
           npx cordova prepare android
